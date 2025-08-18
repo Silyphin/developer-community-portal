@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" th:href="@{/css/admin.css}">
+  <link rel="stylesheet" th:href="@{/css/Header_n_Footer.css}">
+</head>
+<body>
+<!-- Navigation Bar -->
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<!-- Main Content -->
+<main>
+  <div class="admin-container">
+    <h1>Admin Dashboard</h1>
+
+    <!-- Total Users -->
+    <div class="admin-stats">
+      <div class="stat-box">
+        <h3>Total Users</h3>
+        <p th:text="${userCount}"></p>
+      </div>
+    </div>
+
+    <!-- Administrative Actions -->
+    <div class="admin-actions">
+      <h2>Administrative Actions</h2>
+      <div class="action-buttons">
+        <a th:href="@{/admin/adminUser}" class="admin-btn">Manage Users</a>
+        <a th:href="@{/admin/adminBulkEmail}" class="admin-btn">Send Bulk Invitations</a>
+      </div>
+    </div>
+
+    <!-- Recent Users -->
+    <div>
+      <h2>Recent Users</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Company</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+          <td th:text="${user.id}"></td>
+          <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
+          <td th:text="${user.email}"></td>
+          <td th:text="${user.company}"></td>
+          <td class="actions">
+            <a th:href="@{/admin/users/{id}(id=${user.id})}" class="view-btn">View</a>
+            <a th:href="@{/admin/users/{id}/edit(id=${user.id})}" class="edit-btn">Edit</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- Bootstrap JavaScript and Dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
