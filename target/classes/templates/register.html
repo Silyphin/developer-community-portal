@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Developer Community Portal</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+    <link rel="stylesheet" th:href="@{/css/Header_n_Footer.css}">
+    <!-- Js Validation -->
+    <script th:src="@{/js/register_validation.js}" defer></script>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Register</h4>
+                </div>
+                <div class="card-body">
+                    <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
+
+                    <form th:action="@{/register}" th:object="${registrationForm}" method="post" onsubmit="return validateRegisterForm()" novalidate>
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
+                            <div class="invalid-feedback" id="firstNameError"></div>
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required>
+                            <div class="invalid-feedback" id="lastNameError"></div>
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" class="form-control" id="email" th:field="*{email}" required>
+                            <div class="invalid-feedback" id="emailError"></div>
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password *</label>
+                            <input type="password" class="form-control" id="password" th:field="*{password}" required>
+                            <div class="invalid-feedback" id="passwordError"></div>
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password *</label>
+                            <input type="password" class="form-control" id="confirmPassword" th:field="*{confirmPassword}" required>
+                            <div class="invalid-feedback" id="confirmPasswordError"></div>
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" class="form-control" id="company" th:field="*{company}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" id="city" th:field="*{city}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input type="text" class="form-control" id="country" th:field="*{country}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="tel" class="form-control" id="phoneNumber" th:field="*{phoneNumber}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="programmingLanguages">Programming Languages (comma separated)</label>
+                            <input type="text" class="form-control" id="programmingLanguages" th:field="*{programmingLanguages}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experience">Years of Experience</label>
+                            <input type="text" class="form-control" id="experience" th:field="*{experience}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bio">Bio</label>
+                            <textarea class="form-control" id="bio" rows="3" th:field="*{bio}"></textarea>
+                        </div>
+
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="termsAccepted" th:field="*{termsAccepted}" required>
+                            <label class="form-check-label" for="termsAccepted">
+                                I agree to the <a href="#">Terms and Conditions</a>
+                            </label>
+                            <div class="invalid-feedback" id="termsError"></div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+
+                    <div class="mt-3">
+                        <p>Already have an account? <a th:href="@{/login}">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- Bootstrap JS + jQuery + Popper -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

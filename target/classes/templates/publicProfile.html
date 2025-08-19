@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/Header_n_Footer.css}">
+    <link rel="stylesheet" th:href="@{/css/search.css}">
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container mt-5">
+    <h2>User Profile</h2>
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Full Name:</strong> <span th:text="${user.firstName + ' ' + user.lastName}"></span></p>
+            <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+            <p th:if="${user.programmingLanguages != null and user.programmingLanguages != ''}">
+                <strong>Programming Languages:</strong> <span th:text="${user.programmingLanguages}"></span>
+            </p>
+            <p th:if="${user.experience != null and user.experience != ''}">
+                <strong>Experience:</strong> <span th:text="${user.experience} + ' years'"></span>
+            </p>
+            <p th:if="${user.company != null and user.company != ''}">
+                <strong>Company:</strong> <span th:text="${user.company}"></span>
+            </p>
+            <p th:if="${user.city != null or user.country != null}">
+                <strong>Location:</strong> <span th:text="${user.city != null and user.country != null ? user.city + ', ' + user.country : (user.city != null ? user.city : user.country)}"></span>
+            </p>
+            <p th:if="${user.phoneNumber != null and user.phoneNumber != ''}">
+                <strong>Phone Number:</strong> <span th:text="${user.phoneNumber}"></span>
+            </p>
+            <p th:if="${user.bio != null and user.bio != ''}">
+                <strong>Bio:</strong> <span th:text="${user.bio}"></span>
+            </p>
+            <p><strong>Registered On:</strong> <span th:text="${user.registrationDate}"></span></p>
+            <!-- Back Button -->
+            <a th:href="@{/search}" class="btn btn-secondary mt-3">Back to Search</a>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</html>
